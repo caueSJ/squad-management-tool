@@ -1,11 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 16px;
-}
-
 // Variables //
 // Colors
 $text-color-header: #FFFFFF;
@@ -15,3 +7,18 @@ $text-color-default: #333333;
 $footer-background: #E9E3E9;
 
 $main-gradient: linear-gradient(to bottom, #B93D7B, #673089);
+
+$background-main: #F7F3F7;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+html {
+    // font-size base to use rem like: 1rem = 10px, 1.5rem = 15px, 2rem = 20px...
+    font-size: 62.5%;
+    color: $text-color-default;
+}

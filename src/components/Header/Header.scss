@@ -4,14 +4,14 @@
     display: flex;
     align-items: center;
 
-    height: 3rem;
-    padding-left: 3rem;
-    padding-right: 3rem;
+    height: 5rem;
+    padding: 0 3rem 0 3rem;
     justify-content: space-between;
 
-    background: linear-gradient(to right, rgba(191,14,79,1), rgba(139,31,110,1));
+    background: linear-gradient(to right, #BF0E4F, #8B1F6E);
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+
     color: $text-color-header;
-    
 
     a {
         display: flex;
@@ -19,33 +19,34 @@
         text-decoration: none;
         color: $text-color-header;
 
-        >.product-name {            
-            font-size: 1.2rem;
-            // margin-left to fix a "bug" with Venturus Logo spacing
-            margin-left: -4.5rem;
+        >.product-name {
+            font-size: 1.8rem;
+            margin-left: 1rem;
         }
 
         & :hover {
             cursor: pointer;
-        }        
+        }
     }
 
-    .user-name {
-        font-size: 0.9rem;
+    .user-info {
+        display: flex;
+        align-items: center;
+        font-size: 1.6rem;
     }
 
-    .fake-icon {
-        background-color: #FFF;
+    .user-icon {
+        background-color: #F3F5F7;
         color: $text-color-default;
         border-radius: 50%;
-        padding: 0.6rem;
+        padding: 0.5rem;
         font-weight: bold;
-        margin-left: 0.4rem;
+        margin-left: 1rem;
         cursor: pointer;
         user-select: none;
     }
 
     .venturus-logo {
-        width: 8rem;
+        width: 4rem;
     }
 }

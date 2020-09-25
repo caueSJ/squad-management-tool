@@ -10,9 +10,9 @@ const Header = () => {
                 <span className="product-name">Squad Management Tool</span>
             </a>
 
-            <div>
+            <div className="user-info">
                 <span className="user-name">John Doe</span>
-                <span className="fake-icon" title="John Doe">JD</span>
+                <span className="user-icon" title="John Doe">JD</span>
             </div>
         </header>
     )
