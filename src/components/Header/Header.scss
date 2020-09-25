@@ -1,4 +1,4 @@
-@import '../../globals.scss';
+@import '../../variables.scss';
 
 .Header {
     display: flex;
@@ -35,13 +35,17 @@
         font-size: 1.6rem;
     }
 
+    .user-name {
+        font-size: 1.4rem;
+    }
+
     .user-icon {
         background-color: #F3F5F7;
         color: $text-color-default;
         border-radius: 50%;
         padding: 0.5rem;
         font-weight: bold;
-        margin-left: 1rem;
+        margin-left: 0.5rem;
         cursor: pointer;
         user-select: none;
     }
