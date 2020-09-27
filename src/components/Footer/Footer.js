@@ -8,7 +8,7 @@ const Footer = () => {
 
     return (
         <footer className="Footer">
-            <span>{year} - All rigths reserved</span>
+            <small>{year} - All rigths reserved</small>
         </footer>
     );
 }
