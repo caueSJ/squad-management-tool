@@ -1,0 +1,23 @@
+@import '../../../variables.scss';
+
+.ListItem {
+    display: flex;
+    justify-content: space-between;    
+    padding: 10px 20px;
+    list-style: none;
+    background-color: $list-item-background-color;
+    border-radius: 5px;
+    border: 1.5px transparent solid;
+
+    &:not(:last-child) {
+        margin-bottom: 5px;
+    }
+    
+    &:hover {
+        border: 1.5px $border solid;
+    }
+
+    .info {
+        font-weight: bold;
+    }
+}
