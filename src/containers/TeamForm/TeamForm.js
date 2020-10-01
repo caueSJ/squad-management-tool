@@ -76,12 +76,51 @@ const TeamForm = () => {
                 label: 'Tags',
                 type: 'InputTag',
                 value: ''
+            },
+            formation: {
+                type: 'select',
+                config: {
+                    options: [
+                        {value: '0', label: '3-2-2-3'},
+                        {value: '1', label: '3-2-3-1'},
+                        {value: '2', label: '3-4-3'},
+                        {value: '3', label: '3-5-2'},
+                        {value: '4', label: '4-2-3-1'},
+                        {value: '5', label: '4-3-1-1'},
+                        {value: '6', label: '4-3-2'},
+                        {value: '7', label: '4-4-2'},
+                        {value: '8', label: '4-5-1'},
+                        {value: '9', label: '5-4-1'}
+                    ]
+                },
+                label: 'Formation',
+                class: 'inputStyle',
+                value: '',
+                validation: {
+                    required: false
+                },
+                valid: true,
+                touched: false
+            },
+            search: {
+                type: 'input',
+                config: {
+                    type: 'text'
+                },
+                label: 'Search Players',
+                value: '',
+                validation: {
+                    required: false
+                },
+                class: 'inputStyle',
+                valid: true,
+                toutched: false
             }
         }
     });
     const [registerUserForm, setRegisterUserForm] = useState({...initialRegisterUserForm});
 
-    const renderFormUser = () => {
+    const renderFormTeam = () => {
         const inputArray = [];
 
         for (let key in registerUserForm.fields) {
@@ -92,32 +131,26 @@ const TeamForm = () => {
         }
 
         return (
-            <Form submitFor={saveTeam}>
-                <FormFields>
-                    {inputArray.map(input => (
-                        <Input
-                            key={input.id}
-                            name={input.id}
-                            className={input.config.class}
-                            label={input.config.label}
-                            type={input.config.type}
-                            config={input.config.config}
-                            value={input.config.value}
-                            invalid={!input.config.valid}
-                            shouldValidate={input.config.validation}
-                            inputFocused={input.config.inputFocused}
-                            placeholder={input.config.placeholder}
-                            touched={input.config.touched}
-                            changed={event => inputChangedHandler(event, input.id)}
-                            focused={event => inputFocused(event, input.id)}
-                            blured={event => inputBlured(event, input.id)} />
-                    ))}
-                </FormFields>
-
-                <Button>
-                    Save
-                </Button>
-            </Form>
+            <FormFields>
+                {inputArray.map(input => (
+                    <Input
+                        key={input.id}
+                        name={input.id}
+                        className={input.config.class}
+                        label={input.config.label}
+                        type={input.config.type}
+                        config={input.config.config}
+                        value={input.config.value}
+                        invalid={!input.config.valid}
+                        shouldValidate={input.config.validation}
+                        inputFocused={input.config.inputFocused}
+                        placeholder={input.config.placeholder}
+                        touched={input.config.touched}
+                        changed={event => inputChangedHandler(event, input.id)}
+                        focused={event => inputFocused(event, input.id)}
+                        blured={event => inputBlured(event, input.id)} />
+                ))}
+            </FormFields>
         );
     }
 
@@ -220,10 +253,13 @@ const TeamForm = () => {
             <div className="TeamForm">
                 <Section>
                     <SectionTitle title="Create your team" />
-                    <div className="form-section">
-                        <h2 className="text-center">TEAM INFORMATION</h2>
-                        {renderFormUser()}
-                    </div>                
+                    <Form submitFor={saveTeam}>
+                        <div className="form-section">
+                            <h2 className="text-center">TEAM INFORMATION</h2>
+                            {renderFormTeam()}
+                        </div>
+                        <Button>Save</Button>
+                    </Form>
                 </Section>
             </div>
         </PageDefault>

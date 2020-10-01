@@ -2,6 +2,8 @@ import React from 'react'
 import InputTag from '../InputTag/InputTag';
 
 import RadioButton from '../RadioButton/RadioButton';
+import Select from '../Select/Select';
+import SelectOption from '../SelectOption/SelectOption';
 import TextArea from '../TextArea/TextArea';
 
 import './Input.scss';
@@ -68,8 +70,26 @@ const Input = props => {
             break;
         
         case 'InputTag':
-                return <InputTag label={props.label} />;
-
+            return <InputTag label={props.label} />;
+        
+        case 'select':
+            input = 
+                <Select className={props.className}>
+                    {props.config.options.map((option, key) => (
+                        <SelectOption
+                            key={key}
+                            value={option.value}
+                            label={props.label}
+                            placeholder={option.label}
+                            onChanged={props.changed}
+                            isSelected={props.value === option.value}
+                            htmlRequired={props.required}
+                            className={props.className}
+                        />
+                    ))};
+                </Select>
+                break;
+            
         default:
             input =
             <input 
