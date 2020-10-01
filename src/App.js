@@ -15,6 +15,10 @@ function App() {
             {
                 name: 'Barcelona',
                 description: 'Barcelona Squad',
+                website: '',
+                teamType: 'fantasy',
+                tags: [],
+                formation: '0',
                 players: [
                     {
                         playerId: 1,
@@ -61,6 +65,10 @@ function App() {
             {
                 name: 'Real Madrid',
                 description: 'Real Madrid Squad',
+                website: '',
+                teamType: 'fantasy',
+                tags: [],
+                formation: '0',
                 players: [
                     {
                         playerId: 1,
@@ -107,6 +115,10 @@ function App() {
             {
                 name: 'Liver Pool',
                 description: 'Liver Pool Squad',
+                website: '',
+                teamType: 'fantasy',
+                tags: [],
+                formation: '0',
                 players: [
                     {
                         playerId: 1,

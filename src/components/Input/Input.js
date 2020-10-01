@@ -106,10 +106,22 @@ const Input = props => {
             <label>{props.label}</label>
         </div>
         : null;
-    
+
     const inputGroup =
     <div className="wrapperInput">
         {input}
+        {
+            props.name === 'search' ? 
+                <div>
+                    {props.results.map(result => 
+                        <div key={result.id}>
+                            <label>Name: </label> {result.name}
+                            <label>Age: </label> {result.age}
+                            <label>Nacionality: </label> {result.nacionality}
+                        </div>
+                    )}
+                </div> : null
+        }
     </div>;
         
 

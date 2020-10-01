@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import './TeamForm.scss';
 import PageDefault from '../../components/PageDefault/PageDefault';
@@ -10,14 +11,17 @@ import FormFields from '../../components/FormFields/FormFields';
 import Button from '../../components/Button/Button';
 import Section from '../../components/Section/Section';
 
+import { addTeam } from '../../store/actions';
+
 const TeamForm = () => {
+    const dispatch = useDispatch();
     const [initialRegisterTeamForm, ] = useState({
         formIsValid: false,
         sections: [
             {
                 title: "TEAM INFORMATION",
                 fields: {
-                    teamName: {
+                    name: {
                         type: 'input',
                         config: {
                             type: 'text',
@@ -122,13 +126,15 @@ const TeamForm = () => {
                         },
                         class: 'inputStyle',
                         valid: true,
-                        toutched: false
+                        toutched: false,
+                        results: []
                     }
                 }
             }
         ]
     });
     const [registerTeamForm, setRegisterTeamForm] = useState({...initialRegisterTeamForm});
+    const players = useSelector(state => state.player.players);
 
     const renderFields = (index, fields) => {
         const inputArray = [];
@@ -143,23 +149,25 @@ const TeamForm = () => {
         return (
             <FormFields>
                 {inputArray.map(input => (
-                    <Input
-                        key={input.id}
-                        name={input.id}
-                        className={input.config.class}
-                        label={input.config.label}
-                        type={input.config.type}
-                        config={input.config.config}
-                        value={input.config.value}
-                        invalid={!input.config.valid}
-                        shouldValidate={input.config.validation}
-                        inputFocused={input.config.inputFocused}
-                        placeholder={input.config.placeholder}
-                        touched={input.config.touched}
-                        changed={event => inputChangedHandler(event, index, input.id)}
-                        focused={event => inputFocused(event, input.id)}
-                        blured={event => inputBlured(event, input.id)} />
-                ))}
+                        <Input
+                            key={input.id}
+                            name={input.id}
+                            className={input.config.class}
+                            label={input.config.label}
+                            type={input.config.type}
+                            config={input.config.config}
+                            value={input.config.value}
+                            invalid={!input.config.valid}
+                            shouldValidate={input.config.validation}
+                            inputFocused={input.config.inputFocused}
+                            placeholder={input.config.placeholder}
+                            touched={input.config.touched}
+                            changed={event => inputChangedHandler(event, index, input.id)}
+                            focused={event => inputFocused(event, input.id)}
+                            blured={event => inputBlured(event, input.id)}
+                            results={input.config.results ? input.config.results : []}
+                        />
+                    ))}
             </FormFields>
         )
     }
@@ -178,6 +186,10 @@ const TeamForm = () => {
         );
     }
 
+    const searchPlayers = string => {
+        return players.filter(player => player.name.toLowerCase().indexOf(string.toLowerCase()) !== -1);
+    }
+
     const saveTeam = event => {
         event.preventDefault();
 
@@ -188,13 +200,13 @@ const TeamForm = () => {
 
         const formData = {};
 
-        // formData['id'] = teams.length + 1;
+        registerTeamForm.sections.forEach(section => {
+            for (let inputIdentifier in section.fields) {
+                formData[inputIdentifier] = section.fields[inputIdentifier].value;
+            }
+        });
 
-        for (let inputIdentifier in registerTeamForm.section) {
-            formData[inputIdentifier] = registerTeamForm.section.fields[inputIdentifier].value;
-        }
-
-        // dispatch(registerUser(formData));
+        dispatch(addTeam(formData));
 
         setRegisterTeamForm({...initialRegisterTeamForm});
     }
@@ -257,11 +269,17 @@ const TeamForm = () => {
 
     const inputChangedHandler = (event, index, inputIdentifier) => {
         const value = event.target.value;
+        let results = [];
+
+        if(inputIdentifier === 'search') {
+            results = searchPlayers(value);
+        }
 
         const updatedInput = updateObject(registerTeamForm.sections[index].fields[inputIdentifier], {
             value,
             valid: checkValidity(value, registerTeamForm.sections[index].fields[inputIdentifier].validation),
-            touched: true
+            touched: true,
+            results
         });
 
         const updatedFields = updateObject(registerTeamForm.sections[index].fields, {
