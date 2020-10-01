@@ -57,11 +57,32 @@
             visibility: visible;
         }
     }
+
+    .sort-wrapper {
+        margin-left: 10px;
+        display: inline-flex;
+        align-items: center;;
+        float: right;
+        flex-wrap: nowrap;
+
+        button {
+            padding: 10px;
+            margin-right: -10px;
+            border: none;
+            background: none;
+            outline: none;
+        }
+    }
 }
 
 @media #{$screen-md} {
     .HomePage {
         grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+
+        .sort-wrapper button {
+            padding: 0;
+            margin: 0;
+        }
     }
 }
 

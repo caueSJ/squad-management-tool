@@ -17,6 +17,7 @@ import ListItem from '../../components/ListGroup/ListItem/ListItem';
 import Stats from '../../components/Stats/Stats';
 import RoundedImage from '../../components/RoundedImage/RoundedImage';
 import {FaTrash, FaShareAlt, FaPen} from 'react-icons/fa';
+import {TiArrowSortedUp, TiArrowSortedDown} from 'react-icons/ti';
 
 import { deleteTeam } from '../../store/actions';
 
@@ -78,13 +79,17 @@ const HomePage = () => {
                     <TableRow>
                         <TableCell>
                             Name 
-                            <button onClick={() => setTableOrder({column: 'name', order: 'a-z'})}>A-Z</button>
-                            <button onClick={() => setTableOrder({column: 'name', order: 'z-a'})}>Z-A</button>
+                            <span className="sort-wrapper">
+                                <button onClick={() => setTableOrder({column: 'name', order: 'a-z'})}><TiArrowSortedUp /></button>
+                                <button onClick={() => setTableOrder({column: 'name', order: 'z-a'})}><TiArrowSortedDown /></button>
+                            </span>
                         </TableCell>
                         <TableCell colspan="2">
                             Description
-                            <button onClick={() => setTableOrder({column: 'description', order: 'a-z'})}>A-Z</button>
-                            <button onClick={() => setTableOrder({column: 'description', order: 'z-a'})}>Z-A</button>
+                            <span className="sort-wrapper">
+                                <button onClick={() => setTableOrder({column: 'description', order: 'a-z'})}><TiArrowSortedUp /></button>
+                                <button onClick={() => setTableOrder({column: 'description', order: 'z-a'})}><TiArrowSortedDown /></button>
+                            </span>
                         </TableCell>
                     </TableRow>
                 </TableHead>
