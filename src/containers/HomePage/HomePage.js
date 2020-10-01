@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import './HomePage.scss';
 import Section from '../../components/Section/Section';
@@ -16,50 +18,15 @@ import Stats from '../../components/Stats/Stats';
 import RoundedImage from '../../components/RoundedImage/RoundedImage';
 import {FaTrash, FaShareAlt, FaPen} from 'react-icons/fa';
 
+import { deleteTeam } from '../../store/actions';
+
 const HomePage = () => {
-    const [teamListOrdened, setTeamListOrdened] = useState('default');
-    const [teamToDelete, setTeamToDelete] = useState(null);
-
-    // Object for test
-    const teams = {
-        0: {
-            id: 0,
-            name: 'Barcelona',
-            description: 'Barcelona Squad'
-        },
-        1: {
-            id: 1,
-            name: 'Real Madrid',
-            description: 'Real Madrid Squad'
-        },
-        2: {
-            id: 3,
-            name: 'Liver Poooooooooooooooooool',
-            description: 'Liver Poooooooooooooooooool Squad'
-        }
-    }
-
-    const stats = {
-        0: {
-            id: 0,
-            name: 'Barcelona',
-            percent: '24'
-        },
-        1: {
-            id: 1,
-            name: 'Real Madrid',
-            percent: '25.5'
-        },
-        2: {
-            id: 3,
-            name: 'Liver Pool',
-            percent: '27'
-        }
-    }
+    const dispatch = useDispatch();
+    const teams = useSelector(state => state.team.teams);
+    const players = useSelector(state => state.player.players);
 
     const renderTeamsTable = () => {
-        const teamsArray = Object.values(teams);
-        const teamRows = teamsArray.map(team => {
+        const teamRows = teams.map(team => {
             return(
                 <TableRow key={team.id}>
                     <TableCell>{team.name}</TableCell>
@@ -67,18 +34,20 @@ const HomePage = () => {
                         {team.description}
                     </TableCell>
                     <TableCell class="action-icons">
-                        <span class="tooltip">
-                            <FaTrash onClick={() => deleteTeamRow(team.id)} size="11" />
-                            <span class="tiptext">Remove</span>
+                        <span className="tooltip" onClick={() => deleteTeamRow(team.id)}>
+                            <FaTrash size="11" />
+                            <span className="tiptext">Remove</span>
                         </span>
-                        <span class="tooltip">
+                        <span className="tooltip">
                             <FaShareAlt size="11" />
-                            <span class="tiptext">Share</span>
+                            <span className="tiptext">Share</span>
                         </span>
-                        <span class="tooltip">
-                            <FaPen size="11" />
-                            <span class="tiptext">Edit</span>
-                        </span>
+                        <Link to={`/team/new/${team.id}`}>
+                            <span className="tooltip">
+                                <FaPen size="11" />
+                                <span className="tiptext">Edit</span>
+                            </span>
+                        </Link>
                     </TableCell>
                 </TableRow>
             );
@@ -99,13 +68,47 @@ const HomePage = () => {
         );
     }
 
-    const renderTeamStatsList = (title, infoList) => {
-        const statsArray = Object.values(infoList);
+    const renderTeamStatsList = (title, type) => {
+        const teamsWithAvg = teams.map(team => {
+            let sumAges = 0;
+            team.players.forEach((playerInfo) => {
+                const player = players.filter(player => player.id === playerInfo.playerId)[0];
+                sumAges += player.age;
+            });
+            return {
+                ...team,
+                ageAvg: sumAges / 10
+            };
+        });
+
+        let ordenededTeams;
+
+        if(type === 'HAA') {
+            ordenededTeams = teamsWithAvg.sort((a, b) => {
+                if ( a.ageAvg < b.ageAvg ){
+                    return 1;
+                }
+                if ( a.ageAvg > b.ageAvg ){
+                    return -1;
+                }
+                return 0;
+            });
+        } else {
+            ordenededTeams = teamsWithAvg.sort((a, b) => {
+                if ( a.ageAvg < b.ageAvg ){
+                    return -1;
+                }
+                if ( a.ageAvg > b.ageAvg ){
+                    return 1;
+                }
+                return 0;
+            });
+        }
         return (
             <ListGroup title={title}>
                 <List>
-                    {statsArray.map(team => (
-                        <ListItem info={team.percent}>
+                {ordenededTeams.slice(0, 5).map(team => (
+                        <ListItem key={team.id} info={team.ageAvg}>
                             {team.name}
                         </ListItem>    
                     ))}
@@ -114,11 +117,77 @@ const HomePage = () => {
         );
     }
 
+    const renderTeamStatsPicked = (title, type) => {
+        const nPickPlayer = [];
+
+        teams.forEach(team => {
+            team.players.forEach((playerInfo) => {
+                const playerIndex = nPickPlayer.findIndex(player => player.id === playerInfo.playerId);
+
+                if(playerIndex !== -1) {
+                    nPickPlayer[playerIndex] = {
+                        ...nPickPlayer[playerIndex],
+                        n: nPickPlayer[playerIndex].n + 1
+                    };
+                } else {
+                    nPickPlayer.push({
+                        id: playerInfo.playerId,
+                        n: 1
+                    });
+                }
+            });
+        });
+
+        const percentPickPlayer = nPickPlayer.map(e => ({
+            id: e.id,
+            percent: e.n / teams.length * 100
+        }));
+
+        let ordenededPlayers;
+
+        if(type === 'MPP') {
+            ordenededPlayers = percentPickPlayer.sort((a, b) => {
+                if ( a.percent < b.percent ){
+                    return 1;
+                }
+                if ( a.percent > b.percent ){
+                    return -1;
+                }
+                return 0;
+            });
+        } else {
+            ordenededPlayers = percentPickPlayer.sort((a, b) => {
+                if ( a.percent < b.percent ){
+                    return -1;
+                }
+                if ( a.percent > b.percent ){
+                    return 1;
+                }
+                return 0;
+            });
+        }
+
+        const choosenPlayerInfo = ordenededPlayers[0] ? ordenededPlayers[0] : null;
+
+        if(choosenPlayerInfo === null) {
+            return (<div></div>);
+        }
+
+        const choosenPlayer = players.filter(player => player.id === choosenPlayerInfo.id)[0];
+
+        return (
+            type === 'MPP' ?
+                <Stats title={title} percentage={choosenPlayerInfo.percent}>
+                    <RoundedImage dashed alt={choosenPlayer.name} />
+                </Stats>
+                : <Stats title="Less picked player" percentage={choosenPlayerInfo.percent}>
+                    <RoundedImage borderColor="#A40763" alt={choosenPlayer.name} />
+                </Stats>
+        );
+    }
+
     const deleteTeamRow = (id) => {
-        // dispatch(deleteTeam(teamToDelete));
-        const teamList = [...teams];
-        teams.splice(id, 1);
-        setTeamToDelete(null);
+      dispatch(deleteTeam(id));
     }
 
     return (
@@ -131,18 +200,14 @@ const HomePage = () => {
                 <Section>
                     <SectionTitle title="Top 5"/>
                     <div className="top-5">
-                        {renderTeamStatsList('Highest avg age', stats)}
-                        {renderTeamStatsList('Lowest avg age', stats)}
+                        {renderTeamStatsList('Highest avg age', 'HAA')}
+                        {renderTeamStatsList('Lowest avg age', 'LAA')}
                     </div>
                 </Section>
                 <Section bgGradientH>
                     <div className="player-stats">
-                        <Stats title="Most picked player" percentage="75">
-                            <RoundedImage dashed alt="Cauê da Silva de Jesus" />
-                        </Stats>
-                        <Stats title="Less picked player" percentage="35">
-                            <RoundedImage borderColor="#A40763" alt="Jesus da Silva de Cauê" />
-                        </Stats>
+                        {renderTeamStatsPicked('Most picked player', 'MPP')}
+                        {renderTeamStatsPicked('Less picked player', 'LPP')}
                     </div>
                 </Section>
             </div>

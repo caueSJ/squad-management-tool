@@ -9,11 +9,13 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
 import teamReducer from './store/reducers/teams';
+import playerReducer from './store/reducers/players';
 
 import { watch } from './store/sagas';
 
 const rootReducer = combineReducers({
     team: teamReducer,
+    player: playerReducer
 });
 
 const sagaMiddleware = createSagaMiddleware();

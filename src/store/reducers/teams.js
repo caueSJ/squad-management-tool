@@ -6,8 +6,11 @@ const initialState = {
 };
 
 const addTeam = (state, action) => {
+    const team = updateObject(action.team, {
+        id: state.teams.length + 1
+    });
     return updateObject(state, {
-        teams: [...state.teams, action.team]
+        teams: [...state.teams, team]
     });
 };
 
@@ -37,4 +40,4 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-export default reducer; 
+export default reducer;

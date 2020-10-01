@@ -9,7 +9,7 @@ const Stats = props => {
                 <h3 className="title">{props.title}</h3>
                 <div className="wrapper-img-stats">
                     {props.children}    
-                    <h3 className="percentage">{props.percentage}%</h3>
+                    <h3 className="percentage">{props.percentage.toFixed(2)}%</h3>
                 </div>                
             </div>
         </div>
