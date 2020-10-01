@@ -11,122 +11,132 @@ import Button from '../../components/Button/Button';
 import Section from '../../components/Section/Section';
 
 const TeamForm = () => {
-    const [initialRegisterUserForm, ] = useState({
+    const [initialRegisterTeamForm, ] = useState({
         formIsValid: false,
-        fields: {
-            teamName: {
-                type: 'input',
-                config: {
-                    type: 'text',
-                },
-                class: 'inputStyle',
-                label: 'Team name',
-                value: '',
-                validation: {
-                    required: true
-                },
-                valid: false,
-                touched: false,
-                placeholder: 'Insert team name'
+        sections: [
+            {
+                title: "TEAM INFORMATION",
+                fields: {
+                    teamName: {
+                        type: 'input',
+                        config: {
+                            type: 'text',
+                        },
+                        class: 'inputStyle',
+                        label: 'Team name',
+                        value: '',
+                        validation: {
+                            required: true
+                        },
+                        valid: false,
+                        touched: false,
+                        placeholder: 'Insert team name'
+                    },
+                    description: {
+                        type: 'textarea',
+                        label: 'Description',
+                        value: '',
+                        validation: {
+                            required: false
+                        },
+                        valid: false,
+                        touched: false,
+                        inputFocused: false
+                    },
+                    website: {
+                        type: 'input',
+                        config: {
+                            type: 'url',
+                        },
+                        class: 'inputStyle',
+                        label: 'Team website',
+                        value: '',
+                        validation: {
+                            required: true,
+                            website: true
+                        },
+                        valid: false,
+                        touched: false,
+                        placeholder: 'http://website.com'
+                    },
+                    teamType: {
+                        type: 'radio',
+                        config: {
+                            options: [
+                                {value: 'real', label: 'Real'},
+                                {value: 'fantasy', label: 'Fantasy'},
+                            ]
+                        },
+                        label: 'Team type',
+                        value: '',
+                        validation: {
+                            required: true
+                        },
+                        valid: false,
+                        touched: false
+                    },
+                    tag: {
+                        label: 'Tags',
+                        type: 'InputTag',
+                        value: ''
+                    }
+                }
             },
-            description: {
-                type: 'textarea',
-                label: 'Description',
-                value: '',
-                validation: {
-                    required: false
-                },
-                valid: false,
-                touched: false,
-                inputFocused: false
-            },
-            website: {
-                type: 'input',
-                config: {
-                    type: 'url',
-                },
-                class: 'inputStyle',
-                label: 'Team website',
-                value: '',
-                validation: {
-                    required: true,
-                    website: true
-                },
-                valid: false,
-                touched: false,
-                placeholder: 'http://website.com'
-            },
-            teamType: {
-                type: 'radio',
-                config: {
-                    options: [
-                        {value: 'real', label: 'Real'},
-                        {value: 'fantasy', label: 'Fantasy'},
-                    ]
-                },
-                label: 'Team type',
-                value: '',
-                validation: {
-                    required: true
-                },
-                valid: false,
-                touched: false
-            },
-            tag: {
-                label: 'Tags',
-                type: 'InputTag',
-                value: ''
-            },
-            formation: {
-                type: 'select',
-                config: {
-                    options: [
-                        {value: '0', label: '3-2-2-3'},
-                        {value: '1', label: '3-2-3-1'},
-                        {value: '2', label: '3-4-3'},
-                        {value: '3', label: '3-5-2'},
-                        {value: '4', label: '4-2-3-1'},
-                        {value: '5', label: '4-3-1-1'},
-                        {value: '6', label: '4-3-2'},
-                        {value: '7', label: '4-4-2'},
-                        {value: '8', label: '4-5-1'},
-                        {value: '9', label: '5-4-1'}
-                    ]
-                },
-                label: 'Formation',
-                class: 'inputStyle',
-                value: '',
-                validation: {
-                    required: false
-                },
-                valid: true,
-                touched: false
-            },
-            search: {
-                type: 'input',
-                config: {
-                    type: 'text'
-                },
-                label: 'Search Players',
-                value: '',
-                validation: {
-                    required: false
-                },
-                class: 'inputStyle',
-                valid: true,
-                toutched: false
+            {
+                title: 'CONFIGURE SQUAD',
+                fields: {
+                    formation: {
+                        type: 'select',
+                        config: {
+                            options: [
+                                {value: '0', label: '3-2-2-3'},
+                                {value: '1', label: '3-2-3-1'},
+                                {value: '2', label: '3-4-3'},
+                                {value: '3', label: '3-5-2'},
+                                {value: '4', label: '4-2-3-1'},
+                                {value: '5', label: '4-3-1-1'},
+                                {value: '6', label: '4-3-2'},
+                                {value: '7', label: '4-4-2'},
+                                {value: '8', label: '4-5-1'},
+                                {value: '9', label: '5-4-1'}
+                            ]
+                        },
+                        label: 'Formation',
+                        class: 'inputStyle',
+                        value: '',
+                        validation: {
+                            required: false
+                        },
+                        valid: true,
+                        touched: false
+                    },
+                    search: {
+                        type: 'input',
+                        config: {
+                            type: 'text'
+                        },
+                        label: 'Search Players',
+                        value: '',
+                        validation: {
+                            required: false
+                        },
+                        class: 'inputStyle',
+                        valid: true,
+                        toutched: false
+                    }
+                }
             }
-        }
+        ]
     });
-    const [registerUserForm, setRegisterUserForm] = useState({...initialRegisterUserForm});
+    const [registerTeamForm, setRegisterTeamForm] = useState({...initialRegisterTeamForm});
 
-    const renderFormTeam = () => {
+    const renderFields = (index, fields) => {
         const inputArray = [];
 
-        for (let key in registerUserForm.fields) {
+        for (let key in fields) {
             inputArray.push({
                 id: key,
-                config: registerUserForm.fields[key]
+                config: fields[key]
             });
         }
 
@@ -146,18 +156,32 @@ const TeamForm = () => {
                         inputFocused={input.config.inputFocused}
                         placeholder={input.config.placeholder}
                         touched={input.config.touched}
-                        changed={event => inputChangedHandler(event, input.id)}
+                        changed={event => inputChangedHandler(event, index, input.id)}
                         focused={event => inputFocused(event, input.id)}
                         blured={event => inputBlured(event, input.id)} />
                 ))}
             </FormFields>
+        )
+    }
+
+    const renderFormTeam = () => {
+        return (
+            <Form submitFor={saveTeam}>
+            {registerTeamForm.sections.map((section, index) => (
+                <div key={index} className="form-section">
+                    <h2 className="text-center">{section.title}</h2>
+                    {renderFields(index, section.fields)}
+                </div>
+            ))}
+            <Button>Save</Button>
+            </Form>
         );
     }
 
     const saveTeam = event => {
         event.preventDefault();
 
-        if (!registerUserForm.formIsValid) {
+        if (!registerTeamForm.formIsValid) {            
             changeAllFields('touched', true);
             return false;
         }
@@ -166,17 +190,21 @@ const TeamForm = () => {
 
         // formData['id'] = teams.length + 1;
 
-        for (let inputIdentifier in registerUserForm.fields) {
-            formData[inputIdentifier] = registerUserForm.fields[inputIdentifier].value;
+        for (let inputIdentifier in registerTeamForm.section) {
+            formData[inputIdentifier] = registerTeamForm.section.fields[inputIdentifier].value;
         }
 
         // dispatch(registerUser(formData));
 
-        setRegisterUserForm({...initialRegisterUserForm});
+        setRegisterTeamForm({...initialRegisterTeamForm});
     }
 
     const changeAllFields = (prop, value) => {
-        let currentFormFields = {...registerUserForm.fields};
+        let currentFormFields = '';
+        registerTeamForm.sections.foreach(fields => {
+            console.log(fields);
+        });
+        currentFormFields = {...registerTeamForm.fields};
 
         for (let inputIdentifier in currentFormFields) {
             const updatedInput = updateObject(currentFormFields[inputIdentifier], {
@@ -188,52 +216,52 @@ const TeamForm = () => {
             });
         }
 
-        setRegisterUserForm({
+        setRegisterTeamForm({
             fields: currentFormFields,
-            formIsValid: registerUserForm.formIsValid
+            formIsValid: registerTeamForm.formIsValid
         });
     }
 
-    const inputFocused = (event, inputIdentifier) => {
-        const updatedInput = updateObject(registerUserForm.fields[inputIdentifier], {
+    const inputFocused = (event, inputIdentifier, index) => {
+        const updatedInput = updateObject(registerTeamForm.sections[index].fields[inputIdentifier], {
             inputFocused: true
         });
 
-        const updatedRegisterUserForm = updateObject(registerUserForm.fields, {
+        const updatedRegisterUserForm = updateObject(registerTeamForm.sections[index].fields, {
             [inputIdentifier]: updatedInput
         });
 
-        setRegisterUserForm({
+        setRegisterTeamForm({
             fields: updatedRegisterUserForm,
-            formIsValid: registerUserForm.formIsValid
+            formIsValid: registerTeamForm.formIsValid
         });
     }
 
-    const inputBlured = (event, inputIdentifier) => {
-        const updatedInput = updateObject(registerUserForm.fields[inputIdentifier], {
+    const inputBlured = (event, inputIdentifier, index) => {
+        const updatedInput = updateObject(registerTeamForm.sections[index].fields[inputIdentifier], {
             inputFocused: false
         });
 
-        const updatedRegisterUserForm = updateObject(registerUserForm.fields, {
+        const updatedRegisterUserForm = updateObject(registerTeamForm.sections[index].fields, {
             [inputIdentifier]: updatedInput
         });
 
-        setRegisterUserForm({
+        setRegisterTeamForm({
             fields: updatedRegisterUserForm,
-            formIsValid: registerUserForm.formIsValid
+            formIsValid: registerTeamForm.formIsValid
         });
     }
 
-    const inputChangedHandler = (event, inputIdentifier) => {
+    const inputChangedHandler = (event, index, inputIdentifier) => {
         const value = event.target.value;
 
-        const updatedInput = updateObject(registerUserForm.fields[inputIdentifier], {
+        const updatedInput = updateObject(registerTeamForm.sections[index].fields[inputIdentifier], {
             value,
-            valid: checkValidity(value, registerUserForm.fields[inputIdentifier].validation),
+            valid: checkValidity(value, registerTeamForm.sections[index].fields[inputIdentifier].validation),
             touched: true
         });
 
-        const updatedRegisterUserForm = updateObject(registerUserForm.fields, {
+        const updatedRegisterUserForm = updateObject(registerTeamForm.sections[index].fields, {
             [inputIdentifier]: updatedInput
         });
 
@@ -242,7 +270,7 @@ const TeamForm = () => {
             formIsValid = updatedRegisterUserForm[inputIdentifier].valid && formIsValid;
         }
 
-        setRegisterUserForm({
+        setRegisterTeamForm({
             fields: updatedRegisterUserForm,
             formIsValid
         });
@@ -253,13 +281,7 @@ const TeamForm = () => {
             <div className="TeamForm">
                 <Section>
                     <SectionTitle title="Create your team" />
-                    <Form submitFor={saveTeam}>
-                        <div className="form-section">
-                            <h2 className="text-center">TEAM INFORMATION</h2>
-                            {renderFormTeam()}
-                        </div>
-                        <Button>Save</Button>
-                    </Form>
+                    {renderFormTeam()}
                 </Section>
             </div>
         </PageDefault>

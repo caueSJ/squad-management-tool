@@ -9,10 +9,10 @@ const SelectOption = props => {
         <option
             className={classes.join(' ')}
             value={props.value}
-            onChanged={props.onChanged}
+            onChange={props.onChanged}
             value={props.value}
-            selected={props.isSelected}
-            htmlRequired={props.required}
+            defaultValue={props.isSelected}
+            required={props.required}
             >
             {props.placeholder}
         </option>

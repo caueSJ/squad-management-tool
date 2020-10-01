@@ -56,13 +56,11 @@ const Input = props => {
                         <RadioButton
                             key={key}
                             classes={classes}
-                            name={props.name}
                             label={option.label}
                             id={props.name + "_" + option.value}
-                            onChanged={props.changed}
+                            changed={props.changed}
                             value={option.value}
                             isSelected={props.value === option.value}
-                            htmlRequired={props.required}
                         />
                     ))}
                 </div>
@@ -83,7 +81,7 @@ const Input = props => {
                             placeholder={option.label}
                             onChanged={props.changed}
                             isSelected={props.value === option.value}
-                            htmlRequired={props.required}
+                            required={props.required}
                             className={props.className}
                         />
                     ))};

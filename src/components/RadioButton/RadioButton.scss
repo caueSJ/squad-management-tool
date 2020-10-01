@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 .RadioButton {
     font-size: 1.5rem;
     display: inline-flex;
@@ -6,6 +8,7 @@
     
     label {
         margin-left: 5px;
-        font-weight: lighter;   
+        font-weight: lighter;
+        color: $form-section;
     }
 }
