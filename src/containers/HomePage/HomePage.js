@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -25,8 +25,27 @@ const HomePage = () => {
     const teams = useSelector(state => state.team.teams);
     const players = useSelector(state => state.player.players);
 
+    const [tableOrder, setTableOrder] = useState({column: 'name', order: 'a-z'});
+
+    const sortByCriteria = (list, field, order) => {
+        const fr = order === 'a-z' ? -1 : 1;
+        const lr = order === 'a-z' ? 1 : -1;
+
+        return [...list].sort((a, b) => {
+            if ( a[field] < b[field] ){
+                return fr;
+            }
+            if ( a[field] > b[field] ){
+                return lr;
+            }
+            return 0;
+        });
+    };
+
     const renderTeamsTable = () => {
-        const teamRows = teams.map(team => {
+        const ordenededTeams = tableOrder ? sortByCriteria(teams, tableOrder.column, tableOrder.order) : teams.map(t => ({...t}));
+
+        const teamRows = ordenededTeams.map(team => {
             return(
                 <TableRow key={team.id}>
                     <TableCell>{team.name}</TableCell>
@@ -57,8 +76,16 @@ const HomePage = () => {
             <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell colspan="2">Description</TableCell>
+                        <TableCell>
+                            Name 
+                            <button onClick={() => setTableOrder({column: 'name', order: 'a-z'})}>A-Z</button>
+                            <button onClick={() => setTableOrder({column: 'name', order: 'z-a'})}>Z-A</button>
+                        </TableCell>
+                        <TableCell colspan="2">
+                            Description
+                            <button onClick={() => setTableOrder({column: 'description', order: 'a-z'})}>A-Z</button>
+                            <button onClick={() => setTableOrder({column: 'description', order: 'z-a'})}>Z-A</button>
+                        </TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -81,29 +108,8 @@ const HomePage = () => {
             };
         });
 
-        let ordenededTeams;
-
-        if(type === 'HAA') {
-            ordenededTeams = teamsWithAvg.sort((a, b) => {
-                if ( a.ageAvg < b.ageAvg ){
-                    return 1;
-                }
-                if ( a.ageAvg > b.ageAvg ){
-                    return -1;
-                }
-                return 0;
-            });
-        } else {
-            ordenededTeams = teamsWithAvg.sort((a, b) => {
-                if ( a.ageAvg < b.ageAvg ){
-                    return -1;
-                }
-                if ( a.ageAvg > b.ageAvg ){
-                    return 1;
-                }
-                return 0;
-            });
-        }
+        const ordenededTeams = sortByCriteria(teamsWithAvg, 'ageAvg', type);
+        
         return (
             <ListGroup title={title}>
                 <List>
@@ -143,29 +149,7 @@ const HomePage = () => {
             percent: e.n / teams.length * 100
         }));
 
-        let ordenededPlayers;
-
-        if(type === 'MPP') {
-            ordenededPlayers = percentPickPlayer.sort((a, b) => {
-                if ( a.percent < b.percent ){
-                    return 1;
-                }
-                if ( a.percent > b.percent ){
-                    return -1;
-                }
-                return 0;
-            });
-        } else {
-            ordenededPlayers = percentPickPlayer.sort((a, b) => {
-                if ( a.percent < b.percent ){
-                    return -1;
-                }
-                if ( a.percent > b.percent ){
-                    return 1;
-                }
-                return 0;
-            });
-        }
+        const ordenededPlayers = sortByCriteria(percentPickPlayer, 'percent', type);
 
         const choosenPlayerInfo = ordenededPlayers[0] ? ordenededPlayers[0] : null;
 
@@ -200,14 +184,14 @@ const HomePage = () => {
                 <Section>
                     <SectionTitle title="Top 5"/>
                     <div className="top-5">
-                        {renderTeamStatsList('Highest avg age', 'HAA')}
-                        {renderTeamStatsList('Lowest avg age', 'LAA')}
+                        {renderTeamStatsList('Highest avg age', 'z-a')}
+                        {renderTeamStatsList('Lowest avg age', 'a-z')}
                     </div>
                 </Section>
                 <Section bgGradientH>
                     <div className="player-stats">
-                        {renderTeamStatsPicked('Most picked player', 'MPP')}
-                        {renderTeamStatsPicked('Less picked player', 'LPP')}
+                        {renderTeamStatsPicked('Most picked player', 'z-a')}
+                        {renderTeamStatsPicked('Less picked player', 'a-z')}
                     </div>
                 </Section>
             </div>

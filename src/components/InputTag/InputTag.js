@@ -4,7 +4,6 @@ import './InputTag.scss';
 import { VscClose } from "react-icons/vsc";
 
 const InputTag = props => {
-    let tagInput = null;
     const inputTag = useRef(null);
     const [tags, setTags] = useState(['BR','PTW', 'Attack']);
 

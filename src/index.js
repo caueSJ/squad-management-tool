@@ -5,24 +5,17 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import createSagaMiddleware from 'redux-saga';
+import { createStore, combineReducers } from 'redux';
 
 import teamReducer from './store/reducers/teams';
 import playerReducer from './store/reducers/players';
-
-import { watch } from './store/sagas';
 
 const rootReducer = combineReducers({
     team: teamReducer,
     player: playerReducer
 });
 
-const sagaMiddleware = createSagaMiddleware();
-
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
-
-sagaMiddleware.run(watch);
+const store = createStore(rootReducer);
 
 ReactDOM.render(
     <Provider store={store}>
