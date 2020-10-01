@@ -133,7 +133,7 @@ const HomePage = () => {
                         {renderTeamStatsList('Lowest avg age', stats)}
                     </div>
                 </Section>
-                <Section bgGradient>
+                <Section bgGradientH>
                     <div className="player-stats">
                         <Stats title="Most picked player" percentage="75">
                             <RoundedImage dashed alt="Cauê da Silva de Jesus" />

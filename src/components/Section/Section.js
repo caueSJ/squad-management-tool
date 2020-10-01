@@ -4,8 +4,10 @@ import './Section.scss';
 
 const Section = props => {
     const classes = ['Section'];
-    if (props.bgGradient) {
-        classes.push('bg-gradient');
+    if (props.bgGradientH) {
+        classes.push('bg-gradient-h');
+    } else if(props.bgGradientV) {
+        classes.push('bg-gradient-v');
     }
 
     return (
