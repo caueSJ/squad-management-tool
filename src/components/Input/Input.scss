@@ -37,4 +37,23 @@
     .radio-group {
         display: inline-flex;
     }
+
+    .player-info {
+        display: flex;
+        flex-flow: column;
+
+        font-weight: bold;        
+
+        span {
+            color: $brand-light;
+
+            label {
+                color: $primary-color;
+            }
+        }
+
+        .ListItem {
+            cursor: pointer;
+        }
+    }
 }

@@ -11,8 +11,10 @@
 @media #{($screen-md)} {
     .FormFields {
         margin: 30px;
-
         display: grid;
+    }
+
+    .FormFields0 {
         grid-auto-flow: column;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         grid-template-rows: repeat(3, 100px);
@@ -21,6 +23,11 @@
 
         & div.Input:nth-last-child(-n+2) {
             align-self: center;
-        }    
-    }    
+        }
+    }
+
+    .FormFields1 {
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 10%
+    }
 }

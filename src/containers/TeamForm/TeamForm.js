@@ -128,6 +128,14 @@ const TeamForm = () => {
                         valid: true,
                         toutched: false,
                         results: []
+                    },
+                    camp: {
+                        type: 'camp',
+                        value: '',
+                        validation: {
+                            required: false
+                        },
+                        valid: true
                     }
                 }
             }
@@ -147,7 +155,7 @@ const TeamForm = () => {
         }
 
         return (
-            <FormFields>
+            <FormFields index={index}>
                 {inputArray.map(input => (
                         <Input
                             key={input.id}
@@ -181,13 +189,17 @@ const TeamForm = () => {
                     {renderFields(index, section.fields)}
                 </div>
             ))}
-            <Button>Save</Button>
+            <div className="form-section">
+                <Button>Save</Button>
+            </div>
             </Form>
         );
     }
 
     const searchPlayers = string => {
-        return players.filter(player => player.name.toLowerCase().indexOf(string.toLowerCase()) !== -1);
+        return string.length > 0 ?
+            players.filter(player => player.name.toLowerCase().indexOf(string.toLowerCase()) !== -1)
+            : [];
     }
 
     const saveTeam = event => {

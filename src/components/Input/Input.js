@@ -1,9 +1,13 @@
 import React from 'react'
 import InputTag from '../InputTag/InputTag';
+import List from '../ListGroup/List/List';
+import ListGroup from '../ListGroup/ListGroup';
+import ListItem from '../ListGroup/ListItem/ListItem';
 
 import RadioButton from '../RadioButton/RadioButton';
 import Select from '../Select/Select';
 import SelectOption from '../SelectOption/SelectOption';
+import SquadFormation from '../SquadFormation/SquadFormation';
 import TextArea from '../TextArea/TextArea';
 
 import './Input.scss';
@@ -87,6 +91,10 @@ const Input = props => {
                     ))};
                 </Select>
                 break;
+
+            case 'camp':
+                input = <SquadFormation/>
+                break;
             
         default:
             input =
@@ -112,15 +120,20 @@ const Input = props => {
         {input}
         {
             props.name === 'search' ? 
-                <div>
-                    {props.results.map(result => 
-                        <div key={result.id}>
-                            <label>Name: </label> {result.name}
-                            <label>Age: </label> {result.age}
-                            <label>Nacionality: </label> {result.nacionality}
-                        </div>
-                    )}
-                </div> : null
+                <ListGroup>
+                    <List>
+                        {props.results.map(result => 
+                        <ListItem>
+                            <div class="player-info" key={result.id}>
+                                <span><label>Name: </label> {result.name}</span>
+                                <span><label>Age: </label> {result.age}</span>
+                                <span><label>Nacionality: </label> {result.nacionality}</span>
+                            </div>
+                        </ListItem>    
+                        )}                        
+                    </List>
+                </ListGroup>
+                : null
         }
     </div>;
         
