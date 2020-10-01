@@ -1,21 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
+import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import HomePage from './containers/HomePage/HomePage';
-import TeamForm from './containers/TeamForm/TeamForm';
+
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+
+import teamReducer from './store/reducers/teams';
+
+import { watch } from './store/sagas';
+
+const rootReducer = combineReducers({
+    team: teamReducer,
+});
+
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(watch);
 
 ReactDOM.render(
-    <React.StrictMode>
-        <BrowserRouter>
-            <Switch>
-                <Route strict path="/" component={HomePage} exact />
-                <Route strict path="/team/new" component={TeamForm} />
-                <Route component={() => (<div style={{fontSize:'25px'}}>Erro 404: Page not found :(</div>)} />
-            </Switch>
-        </BrowserRouter>
-  </React.StrictMode>,
+    <Provider store={store}>
+        <App />
+    </Provider>,
     document.getElementById('root')
 );
 

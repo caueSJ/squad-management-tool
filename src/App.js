@@ -1,13 +1,19 @@
 import React from 'react';
 
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import HomePage from './containers/HomePage/HomePage';
+import TeamForm from './containers/TeamForm/TeamForm';
 
 function App() {
   return (
     <div className="App">
-        <Header />
-        <Footer />
+        <BrowserRouter>
+            <Switch>
+                <Route strict path="/" component={HomePage} exact />
+                <Route strict path="/team/new" component={TeamForm} />
+                <Route component={() => (<div style={{fontSize:'25px'}}>Erro 404: Page not found :(</div>)} />
+            </Switch>
+        </BrowserRouter>
     </div>
   );
 }

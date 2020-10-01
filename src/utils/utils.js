@@ -32,7 +32,8 @@ export const checkValidity = (value, rules) => {
 };
 
 export const getInitialLetters = string => {
-    return (
-        string.split(' ').map(word => (word[0].toUpperCase()).join('')
-    ))
+    const splitString = string.split(' ');
+    const firstNameInitialLetter = splitString[0] ? splitString[0][0].toUpperCase() : '';
+    const lastNameInitialLetter = splitString.length > 1 ? splitString[splitString.length - 1][0].toUpperCase() : '';
+    return firstNameInitialLetter + lastNameInitialLetter;
 };

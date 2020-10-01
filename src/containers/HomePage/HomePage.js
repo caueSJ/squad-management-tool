@@ -136,10 +136,10 @@ const HomePage = () => {
                 <Section bgGradient>
                     <div className="player-stats">
                         <Stats title="Most picked player" percentage="75">
-                            <RoundedImage dashed />
+                            <RoundedImage dashed alt="Cauê da Silva de Jesus" />
                         </Stats>
                         <Stats title="Less picked player" percentage="35">
-                            <RoundedImage borderColor="#A40763" />
+                            <RoundedImage borderColor="#A40763" alt="Jesus da Silva de Cauê" />
                         </Stats>
                     </div>
                 </Section>
