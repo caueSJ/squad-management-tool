@@ -200,24 +200,27 @@ const TeamForm = () => {
     }
 
     const changeAllFields = (prop, value) => {
-        let currentFormFields = '';
-        registerTeamForm.sections.foreach(fields => {
-            console.log(fields);
+        const newSections = registerTeamForm.sections.map(section => {
+            let currentFormFields = {...section.fields};
+
+            for (let inputIdentifier in currentFormFields) {
+                const updatedInput = updateObject(currentFormFields[inputIdentifier], {
+                    [prop]: value
+                });
+    
+                currentFormFields = updateObject(currentFormFields, {
+                    [inputIdentifier]: updatedInput
+                });
+            }
+
+            return {
+                title: section.title,
+                fields: currentFormFields
+            };
         });
-        currentFormFields = {...registerTeamForm.fields};
-
-        for (let inputIdentifier in currentFormFields) {
-            const updatedInput = updateObject(currentFormFields[inputIdentifier], {
-                [prop]: value
-            });
-
-            currentFormFields = updateObject(currentFormFields, {
-                [inputIdentifier]: updatedInput
-            });
-        }
 
         setRegisterTeamForm({
-            fields: currentFormFields,
+            sections: newSections,
             formIsValid: registerTeamForm.formIsValid
         });
     }
@@ -261,18 +264,33 @@ const TeamForm = () => {
             touched: true
         });
 
-        const updatedRegisterUserForm = updateObject(registerTeamForm.sections[index].fields, {
+        const updatedFields = updateObject(registerTeamForm.sections[index].fields, {
             [inputIdentifier]: updatedInput
         });
 
+        const updatedSection = updateObject(registerTeamForm.sections[index], {
+            fields: updatedFields
+        });
+
+        const updatedSections = [
+            ...registerTeamForm.sections
+        ];
+        updatedSections[index] = updatedSection;
+
+        const updatedRegisterUserForm = updateObject(registerTeamForm, {
+            sections: updatedSections
+        });
+
         let formIsValid = true;
-        for (let inputIdentifier in updatedRegisterUserForm) {
-            formIsValid = updatedRegisterUserForm[inputIdentifier].valid && formIsValid;
-        }
+        updatedRegisterUserForm.sections.forEach(section => {
+            for (let inputIdentifier in section.fields) {
+                formIsValid = section.fields[inputIdentifier].valid && formIsValid;
+            }
+        });
 
         setRegisterTeamForm({
-            fields: updatedRegisterUserForm,
-            formIsValid
+            ...updatedRegisterUserForm,
+            formIsValid: registerTeamForm.formIsValid
         });
     }
 
