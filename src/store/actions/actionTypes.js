@@ -1,3 +1,3 @@
-export const FETCH_PLAYERS = 'FETCH_PLAYERS';
-export const FETCH_PLAYERS_SUCCESS = 'FETCH_PLAYERS_SUCCESS';
-export const FETCH_PLAYERS_FAIL = 'FETCH_PLAYERS_FAIL';
+export const ADD_TEAM = 'ADD_TEAM';
+export const EDIT_TEAM = 'EDIT_TEAM';
+export const DELETE_TEAM = 'DELETE_TEAM';
