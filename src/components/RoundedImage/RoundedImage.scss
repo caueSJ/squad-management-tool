@@ -1,0 +1,22 @@
+@import '../../variables.scss';
+
+.RoundedImage {
+    display: flex;
+
+    img {
+        background-color: $secondary-color;
+        border-radius: 50%;
+        border: 3px  solid #8E0875;
+        box-shadow: 0px 0px 5px #673089;
+    }
+
+    .dashed {
+        display: flex;
+        align-items: center;
+        padding: 4px;
+        border-style: dashed;
+        border-radius: 50%;
+        border-width: 2px;
+        border-color: #B187C9;
+    }
+}

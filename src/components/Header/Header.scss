@@ -5,23 +5,23 @@
     align-items: center;
 
     height: 5rem;
-    padding: 0 3rem 0 3rem;
+    padding: 0 15px;
     justify-content: space-between;
 
     background: linear-gradient(to right, #BF0E4F, #8B1F6E);
-    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2);
 
-    color: $text-color-header;
+    color: $secondary-color;
 
     a {
         display: flex;
         align-items: center;
         text-decoration: none;
-        color: $text-color-header;
+        color: $secondary-color;
 
-        >.product-name {
-            font-size: 1.8rem;
-            margin-left: 1rem;
+        > .product-name {
+            font-size: $size-secondary;
+            margin-left: 0.5rem;
         }
 
         & :hover {
@@ -36,21 +36,32 @@
     }
 
     .user-name {
-        font-size: 1.4rem;
+        font-size: $size-secondary;
     }
 
     .user-icon {
         background-color: #F3F5F7;
-        color: $text-color-default;
+        color: $primary-color;
         border-radius: 50%;
-        padding: 0.5rem;
+        padding: 5px;
         font-weight: bold;
-        margin-left: 0.5rem;
+        margin-left: 5px;
         cursor: pointer;
         user-select: none;
     }
 
     .venturus-logo {
         width: 4rem;
+    }
+}
+
+@media #{$screen-md} {
+    .Header {
+        padding: 0 30px;
+
+        a > .product-name {
+            font-size: 1.8rem;
+            margin-left: 1rem;
+        }
     }
 }

@@ -1,0 +1,16 @@
+@import '../../variables.scss';
+
+.wrapper-table {
+    margin: 30px 10px;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.Table {    
+    display: table;
+    font-size: $size-secondary;
+    font-weight: bold;
+    width: 100%;
+
+    border-collapse: collapse;
+}

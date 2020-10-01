@@ -1,0 +1,52 @@
+@import '../../variables.scss';
+
+.InputTag {
+    background: $secondary-color;
+    border: 1px solid $border-form;
+    border-radius: 3px;
+    margin-top: 5px;
+    padding: 15px;
+    max-height: 100px;
+    overflow: auto;
+
+    .list-tag {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+
+        .tag {
+            align-items: center;
+            background: $border-primary;
+            border-radius: 20px;
+            color: $secondary-color;
+            display: flex;
+            font-weight: lighter;
+            margin-bottom: 5px;
+            margin-right: 5px;
+            padding: 5px 10px;
+            font-size: $size-secondary;
+        }
+        
+        .remove-icon {
+            display: flex;
+            align-items: center;
+            border: none;
+            background-color: transparent;
+            color: $secondary-color;
+            cursor: pointer;
+            height: 15px;
+            justify-content: center;
+            padding: 1rem 0 1rem 1rem;
+            outline: none;
+        }
+
+        input {
+            font-size: $size-secondary;
+            flex-grow: 1;
+            min-width: 50px;
+            background: none;
+            border: none;
+            outline: none;
+        }
+    }
+}

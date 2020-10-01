@@ -1,0 +1,18 @@
+@import '../../variables.scss';
+
+.TeamForm {
+    padding: $main-padding;
+
+    .form-section {
+        margin: 10px 20px;
+        
+        h2 {
+            color: $form-section;
+        }
+    }
+    @media #{$screen-lg} {
+        .form-section {
+            margin: 20px 40px;
+        }
+    }   
+}

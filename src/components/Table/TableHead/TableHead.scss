@@ -1,0 +1,7 @@
+@import '../../../variables.scss';
+
+.TableHead {
+    td:not(:last-child) {
+        border-right: 2px $table-border-color solid;
+    }
+}

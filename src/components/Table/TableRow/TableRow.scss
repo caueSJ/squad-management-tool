@@ -1,0 +1,36 @@
+@import '../../../variables.scss';
+
+tbody {
+    .TableRow {
+        border-top: 1px $table-border-color solid;
+        border-bottom: 1px $table-border-color solid;
+        td:first-child {
+            border-radius: 5px 0 0 5px;
+        }
+        td:last-child {
+            border-radius: 0 5px 5px 0;
+        }
+        .action-icons > * {
+            display: none;
+        }
+        &:hover {
+            border-top: 1px transparent solid;
+            border-bottom: 1px transparent solid;
+            background-color: $table-hover-background;
+            color: $brand-light;
+            cursor: pointer;
+
+            .action-icons > * {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                padding-left: 0;
+                margin-right: 1rem;
+            }
+        }
+    }
+}
+
+td:first-child {
+    width: 1%;
+}

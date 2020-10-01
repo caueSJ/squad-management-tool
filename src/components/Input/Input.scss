@@ -1,0 +1,40 @@
+@import '../../variables.scss';
+
+.Input {    
+    margin-top: 2rem;
+    justify-self: stretch;
+    align-self: stretch;
+
+    .label {
+        font-size: $size-default;
+        font-weight: bold;
+    }
+
+    .wrapperInput {
+        margin-top: 5px;
+        height: 100%;
+
+        // input:not([type="radio"]), textarea
+        .inputStyle {
+            width: 100%;
+            height: 40px;
+            border: 1px solid $border-form;
+            border-radius: 3px;
+            padding: 5px 10px;
+            color: $primary-color;
+    
+            &:focus {
+                outline: none;
+            }
+    
+            &::placeholder {
+                font-size: $size-secondary;
+                color: hsl(0, 0%, 50%);
+            }
+        }
+    }
+
+    .radio-group {
+        display: inline-flex;
+    }
+}

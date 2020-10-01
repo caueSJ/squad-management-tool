@@ -5,7 +5,7 @@ import './Header.scss';
 const Header = () => {
     return (
         <header className="Header">
-            <a href="./" title="Home Page">
+            <a href="http://localhost:3000/" title="Home Page">
                 <img className="venturus-logo" src={VenturusLogo} alt="Venturus"></img>
                 <span className="product-name">Squad Management Tool</span>
             </a>

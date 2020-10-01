@@ -1,0 +1,26 @@
+@import '../../variables.scss';
+
+.FormFields {
+    margin-top: 30px;
+
+    & .Input:nth-child(2) {
+        grid-row: span 2;
+    }
+}
+
+@media #{($screen-md)} {
+    .FormFields {
+        margin: 30px;
+
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-rows: repeat(3, 100px);
+        grid-column-gap: 10%;
+        align-items: flex-start;
+
+        & div.Input:nth-last-child(-n+2) {
+            align-self: center;
+        }    
+    }    
+}

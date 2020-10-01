@@ -1,14 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './index.scss';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import HomePage from './containers/HomePage/HomePage';
+import TeamForm from './containers/TeamForm/TeamForm';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
+    <React.StrictMode>
+        <BrowserRouter>
+            <Switch>
+                <Route strict path="/" component={HomePage} exact />
+                <Route strict path="/team/new" component={TeamForm} />
+                <Route component={() => (<div style={{fontSize:'25px'}}>Erro 404: Page not found :(</div>)} />
+            </Switch>
+        </BrowserRouter>
   </React.StrictMode>,
-  document.getElementById('root')
+    document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

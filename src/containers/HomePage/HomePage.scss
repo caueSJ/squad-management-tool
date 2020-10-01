@@ -1,0 +1,37 @@
+@import '../../variables.scss';
+
+.HomePage {
+    padding: $main-padding;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-rows: auto;
+    column-gap: 50px;
+    row-gap: 20px;
+
+    .Section:nth-child(1) {
+        grid-row: span 2;
+    }
+
+    .top-5 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .player-stats {
+        padding-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }    
+}
+
+@media #{$screen-md} {
+    .HomePage {
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+}
+
+@media #{$screen-lg} {
+    .HomePage {
+        grid-auto-flow: column; 
+    }
+}

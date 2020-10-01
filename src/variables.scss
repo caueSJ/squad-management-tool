@@ -1,10 +1,42 @@
 /* Colors */
-$text-color-header: #FFFFFF;
-$text-color-section-text-color: #552C8A;
-$text-color-default: #333333;
+$primary-color: #404040;
+$secondary-color: #FFFFFF;
+$brand-dark: #552C8A;
+$brand-light: #B13D7C;
+$form-section: #919191;
 
+// Gradient
+$main-gradient: linear-gradient(to bottom, $brand-light, $brand-dark);
+
+// Background
+$background-main: #F7F3F7;
 $footer-background: #E9E3E9;
 
-$main-gradient: linear-gradient(to bottom, #B93D7B, #673089);
+// Table Component
+$table-hover-background: #EBD5EB;
+$table-border-color: #E4E4E4;
 
-$background-main: #F7F3F7;
+// List
+$list-background-color: #E7E1E6;
+$list-item-background-color: #FFFFFF;
+
+// Border
+$border-primary: #CC2259;
+$border-form: #CDCBCB;
+
+// Main Padding
+$main-padding: 40px 25px;
+
+/* Font Size */
+$size-default: 1.6rem;
+$size-secondary: 1.4rem;
+
+
+/* Media Query (Based on Bootstrap size) */
+$screen-sm: '(min-width: 576px) and (max-width: 767.98px)';
+$screen-md: '(min-width: 768px) and (max-width: 991.98px)';
+$screen-lg: '(min-width: 992px)';
+
+
+// $screen-xl: '(min-width: 1200px)';
+// $screen-xxl: '(min-width: 1480px)';

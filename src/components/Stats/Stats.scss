@@ -1,0 +1,37 @@
+@import '../../variables.scss';
+
+.Stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+    color: $secondary-color;
+
+    .container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .wrapper-img-stats {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }    
+    
+    .title {
+        font-size: 2.2rem;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .percentage {
+        font-size: 2rem;
+        align-self: flex-start;
+        border-bottom: 1px $secondary-color solid;
+        padding-right: 30px;
+        margin-top: 3px;
+    }
+}

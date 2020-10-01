@@ -1,5 +1,7 @@
+@import '../../variables.scss';
+
 .ListGroupContainer {
-    font-size: 1.4rem;
+    font-size: $size-secondary;
     padding: 20px;
 
     .title {

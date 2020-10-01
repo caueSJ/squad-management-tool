@@ -10,6 +10,22 @@
 html {
     /* font-size base to use rem like: 1rem = 10px, 1.5rem = 15px, 2rem = 20px... */
     font-size: 62.5%;
-    color: var(--text-color-default);
-    background-color: var(--background-main);
+    color: $primary-color;
+    background-color: $background-main;
+}
+
+small {
+    font-size: $size-secondary;
+}
+
+h2 {
+    font-size: 2.0rem;
+}
+
+h3 {
+    font-size: 1.6rem;
+}
+
+.text-center {
+    text-align: center;
 }

@@ -1,0 +1,7 @@
+.TableBody {
+    &:before {
+        height: 10px;
+        content:"";
+        display: table-row;
+    }    
+}
