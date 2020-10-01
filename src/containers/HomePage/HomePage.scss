@@ -22,6 +22,41 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }    
+
+    .tooltip {
+        position: relative;
+        display: inline-block;
+
+        .tiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: $primary-color;
+            color: $secondary-color;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px 0;
+            position: absolute;
+            bottom: 150%;
+            left: 50%;
+            margin-left: -60px;
+            font-weight: lighter;
+
+            &:after {
+                content: "";
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                margin-left: -5px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: $primary-color transparent transparent transparent;
+            }
+        }
+
+        &:hover .tiptext {
+            visibility: visible;
+        }
+    }
 }
 
 @media #{$screen-md} {

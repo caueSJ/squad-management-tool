@@ -67,9 +67,18 @@ const HomePage = () => {
                         {team.description}
                     </TableCell>
                     <TableCell class="action-icons">
-                        <FaTrash onClick={() => deleteTeamRow(team.id)} size="11" />
-                        <FaShareAlt onClick={() => deleteTeamRow(team.id)} size="11" />
-                        <FaPen onClick={() => deleteTeamRow(team.id)} size="11" />
+                        <span class="tooltip">
+                            <FaTrash onClick={() => deleteTeamRow(team.id)} size="11" />
+                            <span class="tiptext">Remove</span>
+                        </span>
+                        <span class="tooltip">
+                            <FaShareAlt size="11" />
+                            <span class="tiptext">Share</span>
+                        </span>
+                        <span class="tooltip">
+                            <FaPen size="11" />
+                            <span class="tiptext">Edit</span>
+                        </span>
                     </TableCell>
                 </TableRow>
             );
