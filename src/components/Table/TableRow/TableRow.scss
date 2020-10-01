@@ -26,6 +26,10 @@ tbody {
                 justify-content: center;
                 padding-left: 0;
                 margin-right: 1rem;
+
+                &:last-child {
+                    margin-right: 4rem;
+                }
             }
         }
     }

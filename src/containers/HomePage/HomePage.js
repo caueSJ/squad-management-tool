@@ -52,7 +52,7 @@ const HomePage = () => {
         },
         2: {
             id: 3,
-            name: 'Liver Poooooooooooooooooool',
+            name: 'Liver Pool',
             percent: '27'
         }
     }
@@ -116,6 +116,8 @@ const HomePage = () => {
 
     const deleteTeamRow = (id) => {
         // dispatch(deleteTeam(teamToDelete));
+        const teamList = [...teams];
+        teams.splice(id, 1);
         setTeamToDelete(null);
     }
 
