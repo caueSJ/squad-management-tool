@@ -13,7 +13,7 @@ Start the project
 * [react-icons](https://react-icons.github.io/react-icons/)
 * [node-sass](https://www.npmjs.com/package/node-sass)
 * [react-router-dom](https://reactrouter.com/web/guides/philosophy)
-* [redux] (https://redux.js.org/)
+* [redux](https://redux.js.org/)
 
 ### Achievements
 * Componentization of interface elements
@@ -21,7 +21,6 @@ Start the project
 
 ### Difficulties
 * Integration with the API. The API was not accepting requests from another domain outside of it.
-* Football field
 * Drag and drop
 * Tests
 * Time :hourglass:
